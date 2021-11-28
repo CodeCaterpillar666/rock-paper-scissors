@@ -5,84 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function game() {
-            let rounds = 5;
-            let playerWinRounds = 0;
-            let computerWinRounds = 0;
-            for (let i = 0; i < rounds; i++) {
-                playerSelection = prompt("Make a selection: Rock, Paper or Scissors?")
-                
-                let currRoundResult = playRound(playerSelection)
-                
-                if (currRoundResult == 1) {
-                    playerWinRounds++;
-                } else if (currRoundResult == -1) {
-                    computerWinRounds++;
-                }
-            }
-
-            let tie = rounds - playerWinRounds - computerWinRounds;
-
-            let winner;
-            let winnerRounds;
-            if (playerWinRounds > computerWinRounds) {
-                winner = "Player";
-                winnerRounds = playerWinRounds;
-            } else if (playerWinRounds < computerWinRounds) {
-                winner = "Computer";
-                winnerRounds = computerWinRounds;
-            } else {
-                winner = null;
-            }
-
-            let result;
-            if (winner != null) {
-                result = `The winner is ${winner}! He wons ${winnerRounds} rounds!`;
-            } else {
-                result = "Tie game!";
-            }
-
-            return result;
-        }
-
-        function playRound(playerSelection) {
-            /*
-            0 tie. 1 player win. -1 computer win.
-            */
-            let computerSelection =  computerPlay();
-            playerSelection = playerSelection[0].toUpperCase() + playerSelection.toLowerCase().slice(1);
-            if (tie(playerSelection, computerSelection)) {
-                console.log( "It's a tie. Try again.");
-                return 0;
-            } else if (playerWins(playerSelection, computerSelection)) {
-                console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
-                return 1;
-            } else {
-                console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
-                return -1;
-            }
-        }
-
-        function computerPlay() {
-            // random number 0, 1 or 2.
-            randomNumber = Math.floor(Math.random() * 3);
-            selections = ["Rock", "Paper", "Scissors"];
-            return selections[randomNumber];
-        }
-
-        function tie(playerSelection, computerSelection) {
-            return playerSelection == computerSelection;
-        }
-
-        function playerWins(playerSelection, computerSelection) {
-            return playerSelection == "Rock" && computerSelection == "Scissors" ||
-                   playerSelection == "Scissors" && computerSelection == "Paper" ||
-                   playerSelection == "Paper" && computerSelection == "Rock";
-        }
-    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
-<body>
-    
+<body class="container">
+    <div class="display">
+        <div>Player's Score:</div>
+        <div id="player-score">0</div>
+        <div>Computer's Score:</div>
+        <div id="computer-score">0</div>
+    </div>
+
+    <div class="announcement"></div>
+
+    <div class="buttons">
+        <button>Rock</button>
+        <button>Scissor</button>
+        <button>Paper</button>
+    </div>
+
 </body>
 </html>
